@@ -3,94 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#09080b">
+<meta name="theme-color" content="#090808">
 <title>Humanity Atlas — L'Arbre vivant du savoir humain</title>
-<style>
-:root{--ivory:#f3eee3;--muted:#c9c0b1;--gold:#d9b878;--glass:rgba(11,10,14,.44);--line:rgba(255,255,255,.14)}
-*{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08070a;color:var(--ivory);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button{font:inherit;color:inherit} #app{position:fixed;inset:0;overflow:hidden;background:#08070a}
-.scene{position:absolute;inset:-7%;transform:translate3d(0,0,0) scale(1.045);will-change:transform;transition:transform .18s ease-out}
-.scene:before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(5,4,7,.82) 0%,rgba(5,4,7,.54) 32%,rgba(5,4,7,.10) 63%,rgba(5,4,7,.22) 100%),linear-gradient(180deg,rgba(2,2,3,.18) 0%,rgba(2,2,3,.05) 54%,rgba(4,3,5,.48) 100%),url("assets/atlas-bg.svg");background-size:cover;background-position:center;filter:saturate(1.04) contrast(1.03) brightness(.91)}
-.scene:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 40%,rgba(255,184,166,.07),transparent 24%),radial-gradient(circle at 58% 75%,transparent 22%,rgba(6,5,7,.18) 70%);mix-blend-mode:screen;pointer-events:none}
-.water{position:absolute;left:-4%;right:-4%;bottom:-6%;height:38%;pointer-events:none;overflow:hidden;opacity:.56;mask-image:linear-gradient(to bottom,transparent 0,#000 35%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 35%)}
-.water:before,.water:after{content:"";position:absolute;inset:-15% -5%;background:repeating-radial-gradient(ellipse at 65% 40%,rgba(255,218,192,.15) 0 1px,transparent 2px 13px);transform:scaleY(.22);filter:blur(.5px);animation:ripples 8s linear infinite}
-.water:after{opacity:.35;animation-duration:12s;transform:scaleY(.16) translateX(3%)} @keyframes ripples{to{background-position:150px 40px}}
-.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 55% 46%,transparent 30%,rgba(0,0,0,.18) 72%,rgba(0,0,0,.55) 100%)}
-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-header{position:fixed;z-index:20;left:34px;right:34px;top:24px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px}
-.brand{display:flex;align-items:center;gap:11px;letter-spacing:.18em;font-size:12px;font-weight:650}.sigil{width:39px;height:39px;border:1px solid rgba(232,210,181,.45);border-radius:50%;display:grid;place-items:center;background:rgba(8,7,10,.25);backdrop-filter:blur(10px);box-shadow:0 0 35px rgba(238,184,133,.08)}.sigil:before{content:"✦";font-size:18px;color:#e2c88d}
-nav{display:flex;justify-content:center;gap:28px} nav button,.ghost{border:0;background:transparent;padding:10px 2px;cursor:pointer;color:rgba(246,239,229,.76);font-size:12px;letter-spacing:.08em;transition:.22s}nav button:hover{color:#fff;transform:translateY(-1px)}
-.enter{border:1px solid rgba(232,210,181,.32);background:rgba(15,12,16,.38);backdrop-filter:blur(14px);border-radius:999px;padding:11px 18px;cursor:pointer;transition:.22s}.enter:hover{background:rgba(232,210,181,.10);border-color:rgba(232,210,181,.55)}
-.hero{position:fixed;z-index:12;left:7.4vw;top:50%;transform:translateY(-51%);width:min(610px,44vw)}
-.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:#c9aa72;margin-bottom:18px}
-h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,5.8vw,88px);line-height:.93;letter-spacing:-.045em;font-weight:500;margin:0;text-shadow:0 4px 30px rgba(0,0,0,.28)}
-h1 em{display:block;font-style:normal;color:#ead1c5}
-.hero p{max-width:530px;font-size:15px;line-height:1.75;color:rgba(238,232,224,.75);margin:22px 0 24px;text-shadow:0 2px 16px rgba(0,0,0,.45)}
-.cta{display:inline-flex;align-items:center;gap:11px;border:1px solid rgba(233,204,158,.44);background:rgba(23,17,22,.42);backdrop-filter:blur(12px);border-radius:999px;padding:14px 21px;cursor:pointer;transition:.25s;box-shadow:0 10px 45px rgba(0,0,0,.18)}.cta:hover{transform:translateY(-2px);background:rgba(198,151,113,.15);box-shadow:0 15px 50px rgba(0,0,0,.28)}.cta span{font-size:18px}
-.cards{position:fixed;z-index:14;left:7.4vw;right:7.4vw;bottom:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.card{position:relative;min-height:92px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(23,18,24,.47),rgba(10,9,12,.52));backdrop-filter:blur(18px);text-align:left;padding:16px 16px 14px;cursor:pointer;overflow:hidden;transition:.25s}.card:hover{transform:translateY(-3px);border-color:rgba(232,203,158,.30);background:rgba(24,19,24,.64)}.card i{display:block;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold);margin-bottom:12px}.card strong{font-family:Georgia,"Times New Roman",serif;font-size:19px;font-weight:500;display:block}.card small{display:block;color:#aaa197;font-size:10px;letter-spacing:.06em;margin-top:4px}
-.motionhint{position:fixed;z-index:10;right:32px;bottom:133px;color:rgba(242,237,229,.46);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
-.panel{position:fixed;z-index:40;inset:0 0 0 auto;width:min(470px,100%);padding:28px;background:linear-gradient(180deg,rgba(15,12,17,.96),rgba(7,6,9,.97));border-left:1px solid var(--line);backdrop-filter:blur(26px);transform:translateX(105%);transition:.48s cubic-bezier(.2,.8,.2,1);overflow:auto}.panel.open{transform:none}
-.panelhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:42px}.panelhead b{letter-spacing:.18em;font-size:11px}.close{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);cursor:pointer;font-size:22px}
-.panel .eyebrow{color:#cfad76;text-transform:uppercase;letter-spacing:.18em;font-size:9px}.panel h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:42px;margin:10px 0 13px}.panel p{line-height:1.7;color:#c8c0b7;font-size:14px}.list{margin-top:24px;display:grid;gap:9px}.item{padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.025)}.item b{font-size:12px}.item span{display:block;color:#989087;font-size:11px;line-height:1.55;margin-top:5px}
-@media(max-width:850px){header{left:16px;right:16px;top:14px}.brand{font-size:10px}.sigil{width:35px;height:35px}nav{display:none}.enter{padding:9px 14px}.hero{left:18px;top:44%;width:calc(100vw - 36px);transform:translateY(-50%)}h1{font-size:clamp(45px,13vw,66px);max-width:92%}.hero p{font-size:13px;max-width:88%;margin-top:16px}.cards{left:12px;right:12px;bottom:12px;grid-template-columns:repeat(2,1fr);gap:7px}.card{min-height:70px;padding:11px 12px}.card i{margin-bottom:7px}.card strong{font-size:15px}.card small{font-size:8px}.motionhint{display:none}.scene{inset:-12%;transform:scale(1.08)}}
-@media(prefers-reduced-motion:reduce){.scene,.card,.cta,.enter{transition:none}.water:before,.water:after{animation:none}}
-</style>
+<meta name="description" content="Humanity Atlas — explorer les connaissances humaines à travers un Arbre de Vie vivant, naturel et interactif.">
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<div id="app">
-  <div class="scene" id="scene"><div class="water"></div></div>
-  <canvas id="fx"></canvas><div class="vignette"></div>
-  <header>
-    <div class="brand"><div class="sigil"></div><span>HUMANITY ATLAS</span></div>
-    <nav><button data-topic="tree">L'Arbre</button><button data-topic="roots">Racines</button><button data-topic="branches">Branches</button><button data-topic="knowledge">Savoirs</button><button data-topic="vision">Vision</button></nav>
-    <button class="enter" id="enter">Entrer</button>
+<main class="experience" id="experience">
+  <div class="scene" aria-hidden="true">
+    <div class="scene__bg" id="sceneBg"></div>
+    <div class="scene__water" id="water"></div>
+    <div class="scene__mist scene__mist--1"></div>
+    <div class="scene__mist scene__mist--2"></div>
+    <canvas id="ambientCanvas"></canvas>
+    <div class="scene__shade"></div>
+  </div>
+
+  <header class="header">
+    <a class="brand" href="#" aria-label="Humanity Atlas, accueil">
+      <span class="brand__sigil" aria-hidden="true">
+        <svg viewBox="0 0 52 52" fill="none">
+          <path d="M26 42V22m0 2c-5-9-12-11-18-8 2 9 8 14 18 14m0-6c5-9 12-11 18-8-2 9-8 14-18 14M26 37c-5 0-10 3-14 8m14-8c5 0 10 3 14 8" stroke="currentColor" stroke-width="1.35"/>
+          <circle cx="26" cy="13" r="2.5" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </span>
+      <span>
+        <strong>HUMANITY ATLAS</strong>
+        <small>L'Arbre vivant du savoir humain</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <button data-jump="tree">L'Arbre</button>
+      <button data-jump="roots">Racines</button>
+      <button data-jump="branches">Branches</button>
+      <button data-jump="knowledge">Savoirs</button>
+      <button data-jump="vision">Vision</button>
+    </nav>
+
+    <button class="enter" id="enterTop">Entrer <span>↗</span></button>
+    <button class="menuToggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
   </header>
-  <main class="hero">
-    <div class="kicker">La mémoire vivante de l'humanité</div>
-    <h1>Tout savoir commence <em>par le vivant.</em></h1>
-    <p>Comprendre la nature. Retrouver les savoirs. Transmettre sans détruire. Humanity Atlas relie ce que l'humanité a appris à ce dont la vie dépend réellement.</p>
-    <button class="cta" id="explore">Explorer l'Arbre <span>→</span></button>
-  </main>
-  <section class="cards">
-    <button class="card" data-topic="water"><i></i><strong>Eau</strong><small>Source de vie</small></button>
-    <button class="card" data-topic="fire"><i></i><strong>Feu</strong><small>Énergie & transformation</small></button>
-    <button class="card" data-topic="soil"><i></i><strong>Sol</strong><small>Fondement du vivant</small></button>
-    <button class="card" data-topic="nature"><i></i><strong>Nature</strong><small>Équilibres & relations</small></button>
+
+  <section class="hero" id="tree">
+    <div class="hero__eyebrow">UNE MÉMOIRE VIVANTE</div>
+    <h1>Tout savoir<br>commence par <em>le vivant.</em></h1>
+    <p>Comprendre la nature. Retrouver les savoirs.<br>Transmettre sans détruire.</p>
+    <button class="cta" id="exploreBtn">
+      <span>Explorer l'Arbre</span>
+      <span class="cta__orb">↘</span>
+    </button>
   </section>
-  <div class="motionhint">Déplace doucement le curseur · la scène respire</div>
-  <aside class="panel" id="panel">
-    <div class="panelhead"><b>HUMANITY ATLAS</b><button class="close" id="close">×</button></div>
-    <div class="eyebrow" id="panelEye"></div><h2 id="panelTitle"></h2><p id="panelText"></p><div class="list" id="panelList"></div>
+
+  <section class="roots" id="roots" aria-label="Racines du savoir">
+    <button class="knowledgeCard" data-topic="water">
+      <span class="knowledgeCard__glow knowledgeCard__glow--water"></span>
+      <span class="knowledgeCard__index">01</span>
+      <span class="knowledgeCard__copy"><strong>Eau</strong><small>Source de vie</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-topic="fire">
+      <span class="knowledgeCard__glow knowledgeCard__glow--fire"></span>
+      <span class="knowledgeCard__index">02</span>
+      <span class="knowledgeCard__copy"><strong>Feu</strong><small>Énergie & transformation</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-topic="soil">
+      <span class="knowledgeCard__glow knowledgeCard__glow--soil"></span>
+      <span class="knowledgeCard__index">03</span>
+      <span class="knowledgeCard__copy"><strong>Sol</strong><small>Fondement du vivant</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-topic="nature">
+      <span class="knowledgeCard__glow knowledgeCard__glow--nature"></span>
+      <span class="knowledgeCard__index">04</span>
+      <span class="knowledgeCard__copy"><strong>Nature</strong><small>Équilibre & relations</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+  </section>
+
+  <aside class="panel" id="panel" aria-hidden="true">
+    <div class="panel__veil" data-close></div>
+    <article class="panel__card">
+      <button class="panel__close" data-close aria-label="Fermer">×</button>
+      <div class="panel__kicker" id="panelKicker">Racine · 01</div>
+      <h2 id="panelTitle">Eau</h2>
+      <p class="panel__lead" id="panelLead"></p>
+      <blockquote id="panelQuote"></blockquote>
+      <div class="panel__facts" id="panelFacts"></div>
+      <button class="panel__link" id="panelLink">Entrer dans ce savoir <span>→</span></button>
+    </article>
   </aside>
-</div>
-<script>
-const scene=document.getElementById('scene'),panel=document.getElementById('panel'),title=document.getElementById('panelTitle'),eye=document.getElementById('panelEye'),text=document.getElementById('panelText'),list=document.getElementById('panelList');
-const content={
-tree:['L’Arbre de Vie','Navigation centrale',"Les racines sont les besoins fondamentaux. Le tronc représente la transmission. Les grandes branches organisent les domaines du savoir. Les feuilles deviennent des connaissances précises.",['Racines — eau, feu, sol, santé','Tronc — mémoire, langage, transmission','Branches — agriculture, habitat, sciences, énergie']],
-roots:['Les Racines','Fondations',"Tout savoir humain dépend d’un petit nombre de fondations physiques et biologiques. On commence par comprendre ce qui nous maintient en vie avant de chercher à transformer davantage.",['Eau — cycles, qualité, stockage','Feu — chaleur, énergie, sécurité','Sol — fertilité, érosion, matière organique','Nature — saisons, biodiversité, résilience']],
-branches:['Les Branches','Domaines',"Les branches relient les fondations aux grandes familles de connaissances construites par l’humanité.",['Agriculture & alimentation','Élevage & animaux','Habitat & construction','Métallurgie & outils','Navigation & astronomie','Sciences & énergie']],
-knowledge:['Les Savoirs','Bibliothèque vivante',"Chaque savoir sera sourcé, contextualisé et relié à ses prérequis. Le but n’est pas seulement de dire comment faire, mais pourquoi cela fonctionne et quel impact cela peut avoir.",['Contexte historique','Explication scientifique','Pratique responsable','Impact sur les écosystèmes']],
-vision:['Notre Vision','Pourquoi Humanity Atlas',"Retrouver les connaissances fondamentales sans idéaliser le passé : apprendre de l’histoire, utiliser la science actuelle, travailler avec la nature et transmettre ce qui nous rend plus autonomes sans détruire les milieux.",['Comprendre avant d’exploiter','Réparer avant de remplacer','Préserver avant d’épuiser']],
-water:['Eau','Racine fondamentale',"L’eau relie climat, sols, santé, agriculture et habitat. Une société résiliente apprend d’abord à observer son parcours.",['Cycle de l’eau','Infiltration & ruissellement','Récupération & stockage','Qualité & sobriété']],
-fire:['Feu','Racine fondamentale',"Le feu transforme la matière et l’énergie. Sa maîtrise a changé l’histoire humaine, mais sa compréhension inclut aussi le risque, la prévention et l’efficacité.",['Triangle du feu','Combustibles','Transfert de chaleur','Sécurité & prévention']],
-soil:['Sol','Racine fondamentale',"Le sol est un écosystème vivant, pas un simple support. Sa structure, sa biodiversité et sa matière organique déterminent sa capacité à nourrir le vivant.",['Structure & texture','Vie du sol','Matière organique','Érosion & couverture']],
-nature:['Nature','Racine fondamentale',"Observer les saisons, l’eau, le vent, les plantes et les animaux permet de comprendre un milieu avant d’y intervenir.",['Cycles naturels','Biodiversité','Plantes indicatrices','Résilience des écosystèmes']]
-};
-function openTopic(k){const c=content[k]||content.tree;eye.textContent=c[1];title.textContent=c[0];text.textContent=c[2];list.innerHTML=c[3].map((x,i)=>'<div class="item"><b>'+x.split(' — ')[0]+'</b><span>'+(x.split(' — ')[1]||'Découvrir cette connaissance et ses liens avec le vivant.')+'</span></div>').join('');panel.classList.add('open')}
-document.querySelectorAll('[data-topic]').forEach(b=>b.addEventListener('click',()=>openTopic(b.dataset.topic)));document.getElementById('explore').onclick=()=>openTopic('tree');document.getElementById('enter').onclick=()=>openTopic('vision');document.getElementById('close').onclick=()=>panel.classList.remove('open');
 
-let tx=0,ty=0,cx=0,cy=0;
-function setPointer(x,y){tx=(x/window.innerWidth-.5)*-2.4;ty=(y/window.innerHeight-.5)*-1.6}
-addEventListener('pointermove',e=>setPointer(e.clientX,e.clientY),{passive:true});
-addEventListener('deviceorientation',e=>{if(e.gamma==null)return;tx=Math.max(-2.1,Math.min(2.1,-e.gamma*.055));ty=Math.max(-1.4,Math.min(1.4,(e.beta-45)*.025))});
-function parallax(){cx+=(tx-cx)*.035;cy+=(ty-cy)*.035;scene.style.transform='translate3d('+cx+'%,'+cy+'%,0) scale('+(innerWidth<850?1.08:1.045)+')';requestAnimationFrame(parallax)}parallax();
-
-const canvas=document.getElementById('fx'),ctx=canvas.getContext('2d');let W,H,dpr,fx=[];
-function resize(){dpr=Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener('resize',resize);resize();
-function spawn(type){return type==='fly'?{t:type,x:W*(.35+Math.random()*.62),y:H*(.12+Math.random()*.7),r:1+Math.random()*1.4,a:.2+Math.random()*.65,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.18,p:Math.random()*6.28}:{t:type,x:Math.random()*W,y:-20-Math.random()*H*.3,r:2+Math.random()*4,a:.2+Math.random()*.45,vx:-.2+Math.random()*.45,vy:.18+Math.random()*.35,p:Math.random()*6.28}}
-for(let i=0;i<36;i++)fx.push(spawn('fly'));for(let i=0;i<25;i++)fx.push(spawn('petal'));
-function animateFX(t){ctx.clearRect(0,0,W,H);for(const p of fx){p.p+=.015;p.x+=p.vx+Math.sin(p.p)*.08;p.y+=p.vy;if(p.t==='fly'){const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);glow.addColorStop(0,'rgba(255,220,140,'+p.a+')');glow.addColorStop(1,'rgba(255,210,100,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,p.r*6,0,7);ctx.fill();if(p.x<0||p.x>W||p.y<0||p.y>H)Object.assign(p,spawn('fly'))}else{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.p);ctx.fillStyle='rgba(238,159,174,'+p.a+')';ctx.beginPath();ctx.ellipse(0,0,p.r*1.5,p.r*.55,.5,0,7);ctx.fill();ctx.restore();if(p.y>H+30)Object.assign(p,spawn('petal'))}}requestAnimationFrame(animateFX)}requestAnimationFrame(animateFX);
-</script>
+  <div class="hint"><span class="hint__dot"></span><span>Déplacez doucement votre regard dans la scène</span></div>
+  <div class="soundButton" id="soundButton" title="Ambiance sonore (à venir)" aria-label="Ambiance sonore">♪</div>
+</main>
+<script src="./script.js"></script>
 </body>
 </html>
