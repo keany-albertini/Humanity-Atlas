@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090808">
 <title>Humanity Atlas — L'Arbre vivant du savoir humain</title>
-<meta name="description" content="Humanity Atlas — explorer les connaissances humaines à travers un Arbre de Vie vivant, naturel et interactif.">
+<meta name="description" content="Humanity Atlas transmet les savoirs essentiels et les savoir-faire concrets pour devenir plus autonome sans détruire le vivant.">
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <main class="experience" id="experience">
   <div class="scene" aria-hidden="true">
     <div class="scene__bg" id="sceneBg"></div>
-    <div class="scene__water" id="water"></div>
+    <div class="scene__water"></div>
     <div class="scene__mist scene__mist--1"></div>
     <div class="scene__mist scene__mist--2"></div>
     <canvas id="ambientCanvas"></canvas>
@@ -34,69 +34,81 @@
     </a>
 
     <nav class="nav" aria-label="Navigation principale">
-      <button data-jump="tree">L'Arbre</button>
-      <button data-jump="roots">Racines</button>
-      <button data-jump="branches">Branches</button>
-      <button data-jump="knowledge">Savoirs</button>
-      <button data-jump="vision">Vision</button>
+      <button data-open-library="foundations">Fondamentaux</button>
+      <button data-open-library="materials">Matières & outils</button>
+      <button data-open-library="skills">Savoir-faire</button>
+      <button data-open-library="autonomy">Autonomie</button>
     </nav>
 
-    <button class="enter" id="enterTop">Entrer <span>↗</span></button>
-    <button class="menuToggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+    <button class="enter" data-open-library="all">Explorer <span>↗</span></button>
+    <button class="menuToggle" data-open-library="all" aria-label="Ouvrir les savoirs">☰</button>
   </header>
 
-  <section class="hero" id="tree">
-    <div class="hero__eyebrow">UNE MÉMOIRE VIVANTE</div>
-    <h1>Tout savoir<br>commence par <em>le vivant.</em></h1>
-    <p>Comprendre la nature. Retrouver les savoirs.<br>Transmettre sans détruire.</p>
-    <button class="cta" id="exploreBtn">
-      <span>Explorer l'Arbre</span>
-      <span class="cta__orb">↘</span>
+  <section class="hero">
+    <div class="hero__eyebrow">UNE MÉMOIRE VIVANTE · POUR SAVOIR FAIRE</div>
+    <h1>Comprendre.<br><em>Faire.</em> Transmettre.</h1>
+    <p>Les connaissances essentielles pour cultiver, construire, réparer, conserver, élever, transformer la matière et vivre avec plus d'autonomie — en respectant le vivant.</p>
+    <div class="hero__actions">
+      <button class="cta" data-open-library="all">
+        <span>Entrer dans l'Arbre</span>
+        <span class="cta__orb">↘</span>
+      </button>
+      <div class="hero__proof"><b>13</b> domaines <span>•</span> <b>52</b> savoirs essentiels</div>
+    </div>
+  </section>
+
+  <section class="roots" aria-label="Entrées rapides">
+    <button class="knowledgeCard" data-domain="agriculture">
+      <span class="knowledgeCard__icon">✦</span>
+      <span class="knowledgeCard__copy"><strong>Cultiver</strong><small>Sol, semis, eau, récolte</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-domain="elevage">
+      <span class="knowledgeCard__icon">◌</span>
+      <span class="knowledgeCard__copy"><strong>Élever</strong><small>Besoins, habitat, soins, cycle</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-domain="metallurgie">
+      <span class="knowledgeCard__icon">◇</span>
+      <span class="knowledgeCard__copy"><strong>Métallurgie</strong><small>Métaux, forge, alliages, sécurité</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
+    </button>
+    <button class="knowledgeCard" data-domain="eau">
+      <span class="knowledgeCard__icon">≈</span>
+      <span class="knowledgeCard__copy"><strong>Eau</strong><small>Comprendre, capter, économiser</small></span>
+      <span class="knowledgeCard__arrow">↗</span>
     </button>
   </section>
 
-  <section class="roots" id="roots" aria-label="Racines du savoir">
-    <button class="knowledgeCard" data-topic="water">
-      <span class="knowledgeCard__glow knowledgeCard__glow--water"></span>
-      <span class="knowledgeCard__index">01</span>
-      <span class="knowledgeCard__copy"><strong>Eau</strong><small>Source de vie</small></span>
-      <span class="knowledgeCard__arrow">↗</span>
-    </button>
-    <button class="knowledgeCard" data-topic="fire">
-      <span class="knowledgeCard__glow knowledgeCard__glow--fire"></span>
-      <span class="knowledgeCard__index">02</span>
-      <span class="knowledgeCard__copy"><strong>Feu</strong><small>Énergie & transformation</small></span>
-      <span class="knowledgeCard__arrow">↗</span>
-    </button>
-    <button class="knowledgeCard" data-topic="soil">
-      <span class="knowledgeCard__glow knowledgeCard__glow--soil"></span>
-      <span class="knowledgeCard__index">03</span>
-      <span class="knowledgeCard__copy"><strong>Sol</strong><small>Fondement du vivant</small></span>
-      <span class="knowledgeCard__arrow">↗</span>
-    </button>
-    <button class="knowledgeCard" data-topic="nature">
-      <span class="knowledgeCard__glow knowledgeCard__glow--nature"></span>
-      <span class="knowledgeCard__index">04</span>
-      <span class="knowledgeCard__copy"><strong>Nature</strong><small>Équilibre & relations</small></span>
-      <span class="knowledgeCard__arrow">↗</span>
-    </button>
+  <div class="hint"><span class="hint__dot"></span><span>Déplacez votre regard dans la scène</span></div>
+
+  <section class="library" id="library" aria-hidden="true">
+    <div class="library__backdrop" data-close-library></div>
+    <div class="library__shell">
+      <header class="library__header">
+        <div>
+          <span class="library__kicker">L'ARBRE DES CONNAISSANCES</span>
+          <h2>Apprendre pour devenir autonome.</h2>
+          <p>Chaque savoir va du principe à la pratique : comprendre → préparer → faire → vérifier → transmettre.</p>
+        </div>
+        <button class="library__close" data-close-library aria-label="Fermer">×</button>
+      </header>
+
+      <div class="library__toolbar">
+        <label class="search">
+          <span>⌕</span>
+          <input id="knowledgeSearch" type="search" placeholder="Rechercher : semis, acier, eau, bois…" autocomplete="off">
+        </label>
+        <div class="filters" id="filters"></div>
+      </div>
+
+      <div class="library__layout">
+        <aside class="domainRail" id="domainRail"></aside>
+        <div class="knowledgeGrid" id="knowledgeGrid"></div>
+        <article class="lesson" id="lesson" aria-hidden="true"></article>
+      </div>
+    </div>
   </section>
-
-  <aside class="panel" id="panel" aria-hidden="true">
-    <div class="panel__veil" data-close></div>
-    <article class="panel__card">
-      <button class="panel__close" data-close aria-label="Fermer">×</button>
-      <div class="panel__kicker" id="panelKicker">Racine · 01</div>
-      <h2 id="panelTitle">Eau</h2>
-      <p class="panel__lead" id="panelLead"></p>
-      <blockquote id="panelQuote"></blockquote>
-      <div class="panel__facts" id="panelFacts"></div>
-      <button class="panel__link" id="panelLink">Entrer dans ce savoir <span>→</span></button>
-    </article>
-  </aside>
-
-  <div class="hint"><span class="hint__dot"></span><span>Déplacez doucement votre regard dans la scène</span></div>
-  <div class="soundButton" id="soundButton" title="Ambiance sonore (à venir)" aria-label="Ambiance sonore">♪</div>
 </main>
 <script src="./script.js"></script>
 </body>
