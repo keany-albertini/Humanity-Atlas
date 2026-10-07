@@ -261,9 +261,17 @@ function filteredKnowledge(){
 }
 function renderGrid(){
  const list=filteredKnowledge();
- grid.innerHTML=list.length?list.map(k=>{
+ grid.innerHTML=list.length?list.map((k,i)=>{
   const d=domainById(k.domain);
-  return '<button class="lessonCard" data-lesson="'+k.id+'"><span class="lessonCard__tag">'+k.level+'</span><div class="lessonCard__visual">'+d.icon+'</div><div class="lessonCard__meta">'+d.name+'</div><h3>'+k.title+'</h3><p>'+k.summary+'</p></button>';
+  const num=String(i+1).padStart(2,'0');
+  return '<button class="lessonCard lessonCard--'+d.id+'" data-lesson="'+k.id+'">'+
+    '<div class="lessonCard__visual"><span class="lessonCard__icon">'+d.icon+'</span></div>'+
+    '<div class="lessonCard__copy">'+
+      '<div class="lessonCard__number">'+num+'</div>'+
+      '<div class="lessonCard__meta">'+d.name+' · '+k.level+'</div>'+
+      '<h3>'+k.title+'</h3><p>'+k.summary+'</p>'+
+      '<span class="lessonCard__read">Lire le savoir <b>→</b></span>'+
+    '</div></button>';
  }).join(''):'<div class="empty">Aucun savoir ne correspond à cette recherche.</div>';
  grid.querySelectorAll('[data-lesson]').forEach(b=>b.onclick=()=>openLesson(b.dataset.lesson));
 }
