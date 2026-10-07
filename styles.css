@@ -26,3 +26,265 @@
 @media(max-width:900px){.header{height:82px;padding:0 18px;grid-template-columns:1fr auto}.nav,.enter{display:none}.menuToggle{display:block}.brand small{display:none}.hero{left:24px;right:24px;width:auto;top:43%;transform:translateY(-50%);max-width:650px}.hero h1{font-size:clamp(44px,12vw,68px)}.roots{left:14px;right:14px;bottom:14px;grid-template-columns:repeat(2,1fr);gap:7px}.knowledgeCard{min-height:72px;padding:12px}.hint{display:none}.scene__bg{inset:-10vh -18vw;width:136vw;height:120vh;background-position:64% 47%}.library__shell{inset:7px;padding:18px;border-radius:20px}.library__layout{grid-template-columns:1fr}.domainRail{display:none}.knowledgeGrid{grid-template-columns:repeat(2,minmax(150px,1fr))}.library__toolbar{flex-direction:column;align-items:stretch}.search{min-width:0;width:100%}.lesson{padding:20px}.lesson__blocks{grid-template-columns:1fr}}
 @media(max-width:560px){.brand strong{font-size:12px}.brand__sigil{width:38px;height:38px}.hero{top:39%;left:19px;right:19px}.hero__eyebrow{font-size:8px;margin-bottom:14px}.hero h1{font-size:clamp(40px,13.5vw,59px)}.hero p{font-size:13px;line-height:1.55;margin:18px 0 20px}.hero__proof{display:none}.roots{overflow-x:auto;grid-template-columns:repeat(4,210px);scrollbar-width:none;padding-right:50px}.roots::-webkit-scrollbar{display:none}.library__header p{display:none}.library__header h2{font-size:29px}.library__shell{padding:14px}.knowledgeGrid{grid-template-columns:1fr 1fr;gap:7px}.lessonCard{min-height:170px;padding:12px}.lessonCard__visual{height:62px}.lessonCard h3{font-size:16px}.lesson__diagram{grid-template-columns:1fr;padding:14px}.diagramStep{display:grid;grid-template-columns:42px 1fr;align-items:center;text-align:left;gap:12px}.diagramStep b{margin:0}.diagramStep:not(:last-child):after{content:"↓";right:auto;left:17px;top:44px}.lesson__intro{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.scene__bg{transform:scale(1.07)!important}}
+
+/* --- Editorial Atlas layout inspired by the provided reference --- */
+.library__shell{
+  inset:0;
+  border:0;
+  border-radius:0;
+  background:#08252b;
+  padding:0;
+}
+.library__header{
+  padding:34px clamp(22px,5vw,74px) 28px;
+  background:
+    linear-gradient(180deg,rgba(4,17,21,.96),rgba(7,34,40,.96)),
+    radial-gradient(circle at 75% 25%,rgba(94,131,112,.16),transparent 34%);
+  border-bottom:1px solid rgba(236,244,232,.08);
+}
+.library__kicker{color:#d7d7a8}
+.library__header h2{
+  max-width:760px;
+  color:#f0eee1;
+  font-size:clamp(38px,4.6vw,72px);
+  line-height:.94;
+}
+.library__header p{
+  color:#8da3a3;
+  max-width:650px;
+}
+.library__close{
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.14);
+}
+.library__toolbar{
+  padding:16px clamp(22px,5vw,74px);
+  background:#08252b;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.search{
+  background:rgba(255,255,255,.035);
+  border-color:rgba(255,255,255,.1);
+}
+.filter{
+  border-color:rgba(255,255,255,.08);
+  color:#829596;
+}
+.filter.active{
+  color:#e6e3ce;
+  background:rgba(210,218,167,.08);
+  border-color:rgba(214,220,170,.26);
+}
+.library__layout{
+  grid-template-columns:190px 1fr;
+  gap:0;
+  min-height:0;
+}
+.domainRail{
+  padding:28px 14px 40px clamp(18px,3vw,40px);
+  background:#071f24;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.domainButton{
+  border-radius:0;
+  padding:10px 8px;
+}
+.domainButton:hover,.domainButton.active{
+  background:transparent;
+  border-color:transparent;
+  color:#f2efdf;
+}
+.domainButton.active{border-left:1px solid #d7d7a8}
+.domainButton i{color:#c7c996}
+.knowledgeGrid{
+  display:block;
+  padding:36px clamp(24px,6vw,96px) 80px;
+  background:#08252b;
+}
+.lessonCard{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(220px,38%) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(30px,6vw,90px);
+  width:100%;
+  max-width:980px;
+  min-height:300px;
+  margin:0 auto 46px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:visible;
+  text-align:left;
+  box-shadow:none;
+}
+.lessonCard:hover{
+  transform:none;
+  background:transparent;
+  border:0;
+}
+.lessonCard:nth-child(even){
+  grid-template-columns:minmax(0,1fr) minmax(220px,38%);
+}
+.lessonCard:nth-child(even) .lessonCard__visual{order:2}
+.lessonCard:nth-child(even) .lessonCard__copy{order:1}
+.lessonCard__visual{
+  position:relative;
+  height:260px;
+  margin:0;
+  border-radius:2px;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(5,34,39,.04),rgba(4,26,31,.28)),
+    url("./assets/atlas-bg.jpg") center 45%/cover no-repeat;
+  box-shadow:0 22px 45px rgba(0,0,0,.22);
+}
+.lessonCard:nth-child(3n+2) .lessonCard__visual{background-position:72% 56%}
+.lessonCard:nth-child(3n+3) .lessonCard__visual{background-position:35% 66%}
+.lessonCard__visual:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(14,50,54,.08),rgba(5,20,25,.4));
+}
+.lessonCard__icon{
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  z-index:2;
+  width:38px;height:38px;
+  border:1px solid rgba(255,255,255,.42);
+  border-radius:50%;
+  display:grid;place-items:center;
+  color:#f2edd8;
+  background:rgba(6,30,35,.38);
+  backdrop-filter:blur(7px);
+  font-size:18px;
+}
+.lessonCard__copy{position:relative;padding:28px 8px}
+.lessonCard__number{
+  position:absolute;
+  left:-36px;
+  top:-12px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:76px;
+  line-height:1;
+  color:rgba(227,237,221,.07);
+  letter-spacing:-.05em;
+  pointer-events:none;
+}
+.lessonCard__meta{
+  position:relative;
+  z-index:1;
+  color:#c7c99c;
+  font-size:8px;
+  letter-spacing:.23em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.lessonCard h3{
+  position:relative;
+  z-index:1;
+  max-width:520px;
+  color:#f2efe1;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(28px,3vw,46px);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.035em;
+  margin:0 0 14px;
+}
+.lessonCard p{
+  max-width:500px;
+  color:#91a3a2;
+  font-size:11px;
+  line-height:1.7;
+}
+.lessonCard__read{
+  display:inline-flex;
+  gap:10px;
+  margin-top:14px;
+  color:#c6c99d;
+  font-size:9px;
+  letter-spacing:.08em;
+}
+.lessonCard__read b{font-weight:400}
+.lessonCard__tag{display:none}
+.lesson{
+  inset:0;
+  border:0;
+  border-radius:0;
+  background:#08252b;
+  padding:clamp(22px,5vw,72px);
+}
+.lesson__top{
+  min-height:260px;
+  align-items:flex-start;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding-bottom:30px;
+  margin-bottom:28px;
+  background:
+    linear-gradient(90deg,rgba(8,37,43,.93),rgba(8,37,43,.4)),
+    url("./assets/atlas-bg.jpg") 70% 55%/cover no-repeat;
+  padding:28px;
+}
+.lesson__eyebrow{color:#ced09f}
+.lesson h2{
+  max-width:760px;
+  color:#f2efe0;
+  font-size:clamp(42px,5.2vw,78px);
+  line-height:.94;
+}
+.lesson__intro{
+  max-width:760px;
+  font-size:18px;
+  color:#c9d0c6;
+}
+.lesson__diagram{
+  border-radius:0;
+  border-color:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.018);
+}
+.diagramStep b{
+  border-radius:0;
+  color:#d4d5aa;
+  border-color:rgba(212,213,170,.2);
+}
+.lessonBlock h3{color:#ece8d7}
+.lessonBlock ul,.lessonBlock ol{color:#94a4a2}
+.lesson__safety{
+  border-radius:0;
+  background:rgba(197,198,143,.04);
+  border-color:rgba(197,198,143,.16);
+}
+.lesson__exercise{
+  border-color:#c7c994;
+}
+.empty{color:#a6b5ae}
+
+@media(max-width:900px){
+  .library__layout{grid-template-columns:1fr}
+  .domainRail{display:none}
+  .knowledgeGrid{padding:26px 20px 64px}
+  .lessonCard,.lessonCard:nth-child(even){
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-bottom:46px;
+  }
+  .lessonCard:nth-child(even) .lessonCard__visual,
+  .lessonCard:nth-child(even) .lessonCard__copy{order:initial}
+  .lessonCard__visual{height:220px}
+  .lessonCard__copy{padding:24px 8px 4px 34px}
+  .lessonCard__number{left:0;top:-20px;font-size:68px}
+  .lessonCard h3{font-size:34px}
+}
+@media(max-width:560px){
+  .library__header{padding:24px 18px 20px}
+  .library__toolbar{padding:12px 14px}
+  .knowledgeGrid{padding:22px 14px 56px}
+  .lessonCard__visual{height:190px}
+  .lessonCard__copy{padding-left:26px}
+  .lessonCard h3{font-size:29px}
+  .lessonCard p{font-size:10px}
+  .lesson__top{min-height:220px;padding:18px}
+}
